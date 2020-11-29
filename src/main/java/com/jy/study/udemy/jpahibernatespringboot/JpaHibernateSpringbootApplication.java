@@ -35,6 +35,8 @@ public class JpaHibernateSpringbootApplication implements CommandLineRunner {
         logger.info("Update 10003 -> {}",
                 repository.update(new Person(10003, "Pieter", "Utrecht", new Date())));
 
+        repository.deleteById(10002);
+
         /*logger.info("All users -> {}",
                 personJdbcDao.findAll());
 
