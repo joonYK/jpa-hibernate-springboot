@@ -3,6 +3,7 @@ package com.jy.study.udemy.jpahibernatespringboot.entity;
 import lombok.*;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.Date;
 
@@ -15,6 +16,7 @@ import java.util.Date;
 public class Person {
 
     @Id
+    @GeneratedValue
     private int id;
 
     private String name;

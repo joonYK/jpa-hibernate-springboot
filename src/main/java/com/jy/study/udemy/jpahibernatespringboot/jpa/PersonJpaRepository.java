@@ -1,7 +1,6 @@
 package com.jy.study.udemy.jpahibernatespringboot.jpa;
 
 import com.jy.study.udemy.jpahibernatespringboot.entity.Person;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,5 +16,13 @@ public class PersonJpaRepository {
 
     public Person findById(int id) {
         return entityManager.find(Person.class, id);
+    }
+
+    public Person insert(Person person) {
+        return entityManager.merge(person);
+    }
+
+    public Person update(Person person) {
+        return entityManager.merge(person);
     }
 }

@@ -29,16 +29,16 @@ public class JpaHibernateSpringbootApplication implements CommandLineRunner {
 
         logger.info("User id 10001 -> {}", repository.findById(10001));
 
+        logger.info("Inserting -> {}",
+                repository.insert(new Person("Tara", "Berlin", new Date())));
+
+        logger.info("Update 10003 -> {}",
+                repository.update(new Person(10003, "Pieter", "Utrecht", new Date())));
+
         /*logger.info("All users -> {}",
                 personJdbcDao.findAll());
 
         logger.info("Deleting 10002 -> No of Rows Deleted - {}",
-                personJdbcDao.deleteById(10002));
-
-        logger.info("Inserting 10004 -> {}",
-                personJdbcDao.insert(new Person(10004, "Tara", "Berlin", new Date())));
-
-        logger.info("Update 10003 -> {}",
-                personJdbcDao.update(new Person(10003, "Pieter", "Utrecht", new Date())));*/
+                personJdbcDao.deleteById(10002));*/
     }
 }
