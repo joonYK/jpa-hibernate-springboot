@@ -2,7 +2,6 @@ package com.jy.study.udemy.jpahibernatespringboot;
 
 import com.jy.study.udemy.jpahibernatespringboot.entity.Person;
 import com.jy.study.udemy.jpahibernatespringboot.jdbc.PersonJdbcDao;
-import com.jy.study.udemy.jpahibernatespringboot.jpa.PersonJpaRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,25 +11,25 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.Date;
 
-@SpringBootApplication
-public class JpaHibernateSpringbootApplication implements CommandLineRunner {
+//@SpringBootApplication
+public class SpringJdbcSpringbootApplication implements CommandLineRunner {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    PersonJpaRepository repository;
+    PersonJdbcDao personJdbcDao;
 
     public static void main(String[] args) {
-        SpringApplication.run(JpaHibernateSpringbootApplication.class, args);
+        SpringApplication.run(SpringJdbcSpringbootApplication.class, args);
     }
 
     @Override
     public void run(String... args) throws Exception {
-
-        logger.info("User id 10001 -> {}", repository.findById(10001));
-
-        /*logger.info("All users -> {}",
+        logger.info("All users -> {}",
                 personJdbcDao.findAll());
+
+        logger.info("User id 10001 -> {}",
+                personJdbcDao.findById(10001));
 
         logger.info("Deleting 10002 -> No of Rows Deleted - {}",
                 personJdbcDao.deleteById(10002));
@@ -39,6 +38,6 @@ public class JpaHibernateSpringbootApplication implements CommandLineRunner {
                 personJdbcDao.insert(new Person(10004, "Tara", "Berlin", new Date())));
 
         logger.info("Update 10003 -> {}",
-                personJdbcDao.update(new Person(10003, "Pieter", "Utrecht", new Date())));*/
+                personJdbcDao.update(new Person(10003, "Pieter", "Utrecht", new Date())));
     }
 }
