@@ -2,6 +2,8 @@ package com.jy.study.udemy.jpahibernatespringboot.entity;
 
 import lombok.*;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Date;
 
 @Builder
@@ -9,7 +11,10 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 public class Person {
+
+    @Id
     private int id;
 
     private String name;
@@ -17,6 +22,12 @@ public class Person {
     private String location;
 
     private Date birthDate;
+
+    public Person(String name, String location, Date birthDate) {
+        this.name = name;
+        this.location = location;
+        this.birthDate = birthDate;
+    }
 
     @Override
     public String toString() {
