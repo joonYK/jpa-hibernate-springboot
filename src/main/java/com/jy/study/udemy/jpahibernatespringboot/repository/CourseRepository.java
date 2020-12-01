@@ -3,10 +3,12 @@ package com.jy.study.udemy.jpahibernatespringboot.repository;
 import com.jy.study.udemy.jpahibernatespringboot.entity.Course;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 
 @Repository
+@Transactional
 @RequiredArgsConstructor
 public class CourseRepository {
 
