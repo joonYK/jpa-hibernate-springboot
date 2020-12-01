@@ -1,5 +1,6 @@
 package com.jy.study.udemy.jpahibernatespringboot;
 
+import com.jy.study.udemy.jpahibernatespringboot.entity.Course;
 import com.jy.study.udemy.jpahibernatespringboot.repository.CourseRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +25,7 @@ public class JpaHibernateSpringbootApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         logger.info("Course id 10001 -> {}", repository.findById(10001L));
+        repository.save(new Course("Microservices in 100 steps"));
 
     }
 }
