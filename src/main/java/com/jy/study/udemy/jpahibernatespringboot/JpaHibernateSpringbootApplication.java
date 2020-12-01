@@ -23,9 +23,6 @@ public class JpaHibernateSpringbootApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-
-        logger.info("Course id 10001 -> {}", repository.findById(10001L));
-        repository.save(new Course("Microservices in 100 steps"));
-
+        repository.playWithEntityManager();
     }
 }

@@ -32,4 +32,12 @@ public class CourseRepository {
         Course course = findById(id);
         em.remove(course);
     }
+
+    public void playWithEntityManager() {
+        Course course = new Course("Web Services in 100 Steps");
+        em.persist(course);
+
+        //엔티티 매니저의 트랜잭션 관리에 의해 데이터베이스에 변경된 name 적용.
+        course.setName("Web Services in 100 Steps - Updated");
+    }
 }
