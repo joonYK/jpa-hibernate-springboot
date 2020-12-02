@@ -41,4 +41,20 @@ public class JPQLTest {
         List<Course> resultList = query.getResultList();
         logger.info("Select c From Course c where name like '%100 Steps' -> {}", resultList);
     }
+
+    @Test
+    public void namedQuery_all_courses() {
+        //From Course는 데이터베이스 테이블의 course가 아닌 자바의 엔티티 클래스.
+        TypedQuery<Course> query = em.createNamedQuery("query_get_all_courses", Course.class);
+        List<Course> resultList = query.getResultList();
+        logger.info("name = \"query_get_all_courses\", query = \"Select c From Course c\" -> {}", resultList);
+    }
+
+    @Test
+    public void namedQuery_where_like_100_Step() {
+        TypedQuery<Course> query = em.createNamedQuery("query_get_100_Step_courses", Course.class);
+        List<Course> resultList = query.getResultList();
+        logger.info("name = \"query_get_100_Step_courses\", query = \"Select c From Course c where name like '%100 Steps'\" -> {}", resultList);
+    }
+
 }
