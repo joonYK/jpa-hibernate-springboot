@@ -1,6 +1,5 @@
 package com.jy.study.udemy.jpahibernatespringboot;
 
-import com.jy.study.udemy.jpahibernatespringboot.entity.Course;
 import com.jy.study.udemy.jpahibernatespringboot.repository.CourseRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
