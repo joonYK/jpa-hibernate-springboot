@@ -42,16 +42,13 @@ public class CourseRepository {
         //변경 사항이 데이터베이스에 전송되도록
         em.flush();
 
-        //엔티티 관리자가 변경 사항을 더이상 추적하지 않음.
-        em.detach(course2);
-
-        //엔티티 관리자에서 모든 엔티티 제거.
-        //em.clear();
-
         course1.setName("Web Services in 100 Steps - Updated");
-        em.flush();
-
         course2.setName("Angular Js in 100 Steps - Updated");
+
+        //데이터베이스에 있는 데이터를 조회해서 엔티티를 갱신.
+        //엔티티 매니저에 있는 엔티티는 데이터베이스에 있던 데이터로 수정된다. setName 으로 수정했던 내용은 날아감.
+        em.refresh(course1);
+
         em.flush();
     }
 }
