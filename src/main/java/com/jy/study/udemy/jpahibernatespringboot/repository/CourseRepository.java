@@ -34,10 +34,24 @@ public class CourseRepository {
     }
 
     public void playWithEntityManager() {
-        Course course = new Course("Web Services in 100 Steps");
-        em.persist(course);
+        Course course1 = new Course("Web Services in 100 Steps");
+        em.persist(course1);
+        Course course2 = new Course("Angular Js in 100 Steps");
+        em.persist(course2);
 
-        //엔티티 매니저의 트랜잭션 관리에 의해 데이터베이스에 변경된 name 적용.
-        course.setName("Web Services in 100 Steps - Updated");
+        //변경 사항이 데이터베이스에 전송되도록
+        em.flush();
+
+        //엔티티 관리자가 변경 사항을 더이상 추적하지 않음.
+        em.detach(course2);
+
+        //엔티티 관리자에서 모든 엔티티 제거.
+        //em.clear();
+
+        course1.setName("Web Services in 100 Steps - Updated");
+        em.flush();
+
+        course2.setName("Angular Js in 100 Steps - Updated");
+        em.flush();
     }
 }
