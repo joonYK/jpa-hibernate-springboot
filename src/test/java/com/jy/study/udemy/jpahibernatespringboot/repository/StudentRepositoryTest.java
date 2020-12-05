@@ -1,18 +1,14 @@
 package com.jy.study.udemy.jpahibernatespringboot.repository;
 
-import com.jy.study.udemy.jpahibernatespringboot.entity.Course;
 import com.jy.study.udemy.jpahibernatespringboot.entity.Student;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 @SpringBootTest
 class StudentRepositoryTest {
@@ -26,12 +22,14 @@ class StudentRepositoryTest {
     EntityManager em;
 
     @Test
+    @Transactional
     public void retrieveStudentAndPassportDetails() {
         Student student = em.find(Student.class, 20001L);
-        logger.info("student -> {}", student);
-
-        //OneToOne 매핑 Eager Fetch로 Student조회 시, 같이 조회
+        //Lazy fetch로 passport는 프록시 객체. db에서는 student만 조회하고 passport는 조회하지 않음.
+        logger.info("student -> {}", student.getId());
+        //Lazy fetch로 실제 passport를 사용할 때, 데이터베이스에서 조회해 온다.
         logger.info("passport -> {}", student.getPassport());
+
     }
 
 }
