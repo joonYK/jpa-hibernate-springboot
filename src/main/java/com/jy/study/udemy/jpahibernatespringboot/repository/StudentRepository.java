@@ -42,4 +42,30 @@ public class StudentRepository {
         student.setPassport(passport);
         em.persist(student);
     }
+
+    public void someOperationToUnderstandPersistenceContext() {
+        /*
+         * 영속성 컨텍스트는 하나의 트랜잭션내에서 엔티티들을 관리한다.
+         * 2번 여권 조회시에 지연 로딩에 의해 DB에서 조회를 해야한다.
+         * 하지만 1번 학생을 조회하고 영속성 컨텍스트가 종료되었기 때문에 세션 오류가 난다.
+         */
+
+        //Database Operation 1 - 학생 조회
+        Student student = em.find(Student.class, 20001L);
+        //영속성 컨텍스트 (student)
+
+        //Database Operation 2 - 여권 조회
+        Passport passport = student.getPassport();
+        //영속성 컨텍스트 (student, passport)
+
+        //Database Operation 3 - 여권 수정
+        passport.setNumber("Z123457");
+        //영속성 컨텍스트 (student, 수정된 passport)
+
+        //Database Operation 4 - 학생 수정
+        student.setName("Ranga - updated");
+        //영속성 컨텍스트 (수정된 student, 수정된 passport)
+
+        em.flush();
+    }
 }

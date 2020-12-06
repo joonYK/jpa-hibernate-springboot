@@ -1,5 +1,6 @@
 package com.jy.study.udemy.jpahibernatespringboot.repository;
 
+import com.jy.study.udemy.jpahibernatespringboot.entity.Passport;
 import com.jy.study.udemy.jpahibernatespringboot.entity.Student;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -20,6 +21,11 @@ class StudentRepositoryTest {
 
     @Autowired
     EntityManager em;
+
+    @Test
+    public void someTest() {
+        repository.someOperationToUnderstandPersistenceContext();
+    }
 
     @Test
     @Transactional
