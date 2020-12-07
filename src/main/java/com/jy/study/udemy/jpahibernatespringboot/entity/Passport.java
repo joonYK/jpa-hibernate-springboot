@@ -4,10 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -21,6 +18,13 @@ public class Passport {
 
     @Column(nullable = false)
     private String number;
+
+    /*
+     * student와 양방향 매핑이지만, 관계의 주체는 student이다.
+     * mappedBy에 의해 passport에는 student의 PK가 FK로 저장되지 않음.
+     */
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "passport")
+    private Student student;
 
     protected Passport() {
     }

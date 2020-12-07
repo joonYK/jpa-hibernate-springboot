@@ -38,4 +38,14 @@ class StudentRepositoryTest {
 
     }
 
+    @Test
+    @Transactional
+    public void retrievePassportAndAssociatedStudent() {
+        Passport passport = em.find(Passport.class, 40001L);
+        logger.info("passport -> {}", passport);
+        //student 사용 시, db 에서 조회.
+        logger.info("student -> {}", passport.getStudent());
+
+    }
+
 }
