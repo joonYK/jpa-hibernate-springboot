@@ -8,6 +8,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -26,6 +28,9 @@ public class Course {
     @Column(nullable = false)
     private String name;
 
+    @OneToMany(mappedBy = "course")
+    private List<Review> reviews = new ArrayList<>();
+
     @CreationTimestamp
     private LocalDateTime createdDate;
 
@@ -39,5 +44,12 @@ public class Course {
         this.name = name;
     }
 
+    public void addReview(Review review) {
+        this.reviews.add(review);
+    }
+
+    public void removeReview(Review review) {
+        this.reviews.remove(review);
+    }
 
 }
