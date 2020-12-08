@@ -27,6 +27,7 @@ public class JpaHibernateSpringbootApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         //courseRepository.playWithEntityManager();
-        studentRepository.saveStudentWIthPassport();
+        //studentRepository.saveStudentWIthPassport();
+        courseRepository.addReviewsForCourse();
     }
 }

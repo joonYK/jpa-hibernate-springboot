@@ -2,7 +2,6 @@ package com.jy.study.udemy.jpahibernatespringboot.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -13,7 +12,6 @@ import java.util.List;
 
 @Getter
 @Setter
-@ToString
 @Entity
 @NamedQueries(value = {
         @NamedQuery(name = "query_get_all_courses", query = "Select c From Course c"),
