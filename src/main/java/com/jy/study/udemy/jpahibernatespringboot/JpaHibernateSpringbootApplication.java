@@ -1,5 +1,6 @@
 package com.jy.study.udemy.jpahibernatespringboot;
 
+import com.jy.study.udemy.jpahibernatespringboot.entity.Review;
 import com.jy.study.udemy.jpahibernatespringboot.repository.CourseRepository;
 import com.jy.study.udemy.jpahibernatespringboot.repository.StudentRepository;
 import org.slf4j.Logger;
@@ -8,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootApplication
 public class JpaHibernateSpringbootApplication implements CommandLineRunner {
@@ -28,6 +32,11 @@ public class JpaHibernateSpringbootApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         //courseRepository.playWithEntityManager();
         //studentRepository.saveStudentWIthPassport();
-        courseRepository.addReviewsForCourse();
+        //courseRepository.addHardcodedReviewsForCourse();
+
+        List<Review> reviews = new ArrayList<>();
+        reviews.add(new Review("5", "Great Hands-on Stuff."));
+        reviews.add(new Review("5", "Hatsoff."));
+        courseRepository.addReviewsForCourse(10003L, reviews);
     }
 }
