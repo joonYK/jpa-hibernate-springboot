@@ -28,6 +28,12 @@ public class Student {
     private Passport passport;
 
     @ManyToMany
+    //Join Table 이름 직접 지정.
+    @JoinTable(name = "STUDENT_COURSE",
+            //Join Table 컬럼명 지정.
+            joinColumns = @JoinColumn(name="STUDENT_ID"),
+            inverseJoinColumns = @JoinColumn(name="COURSE_ID")
+    )
     private List<Course> courses = new ArrayList<>();
 
     protected Student() {
