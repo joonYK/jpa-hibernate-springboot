@@ -29,6 +29,9 @@ public class Course {
     @OneToMany(mappedBy = "course")
     private List<Review> reviews = new ArrayList<>();
 
+    @ManyToMany
+    private List<Student> students = new ArrayList<>();
+
     @CreationTimestamp
     private LocalDateTime createdDate;
 
@@ -48,6 +51,10 @@ public class Course {
 
     public void removeReview(Review review) {
         this.reviews.remove(review);
+    }
+
+    public void addStudent(Student student) {
+        this.students.add(student);
     }
 
 }

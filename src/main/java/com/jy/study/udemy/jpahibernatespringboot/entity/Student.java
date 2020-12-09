@@ -8,6 +8,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -25,11 +27,18 @@ public class Student {
     @OneToOne(fetch = FetchType.LAZY)
     private Passport passport;
 
+    @ManyToMany
+    private List<Course> courses = new ArrayList<>();
+
     protected Student() {
     }
 
     public Student(String name) {
         this.name = name;
+    }
+
+    public void addCourse(Course course) {
+        this.courses.add(course);
     }
 
 
