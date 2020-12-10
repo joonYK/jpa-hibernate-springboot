@@ -1,9 +1,8 @@
 package com.jy.study.udemy.jpahibernatespringboot;
 
-import com.jy.study.udemy.jpahibernatespringboot.entity.Course;
-import com.jy.study.udemy.jpahibernatespringboot.entity.Review;
-import com.jy.study.udemy.jpahibernatespringboot.entity.Student;
+import com.jy.study.udemy.jpahibernatespringboot.entity.*;
 import com.jy.study.udemy.jpahibernatespringboot.repository.CourseRepository;
+import com.jy.study.udemy.jpahibernatespringboot.repository.EmployeeRepository;
 import com.jy.study.udemy.jpahibernatespringboot.repository.StudentRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +11,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +25,9 @@ public class JpaHibernateSpringbootApplication implements CommandLineRunner {
 
     @Autowired
     StudentRepository studentRepository;
+
+    @Autowired
+    EmployeeRepository employeeRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(JpaHibernateSpringbootApplication.class, args);
@@ -41,8 +44,13 @@ public class JpaHibernateSpringbootApplication implements CommandLineRunner {
         reviews.add(new Review("5", "Hatsoff."));
         courseRepository.addReviewsForCourse(10003L, reviews);*/
 
-        Student student = new Student("jack");
+        /*Student student = new Student("jack");
         Course course = new Course("Microservices in 100 Steps");
-        studentRepository.insertStudentAndCourse(student, course);
+        studentRepository.insertStudentAndCourse(student, course);*/
+
+        employeeRepository.insert(new PartTimeEmployee("Jill", new BigDecimal(50)));
+        employeeRepository.insert(new FullTimeEmployee("Jack", new BigDecimal(10000)));
+        logger.info("All employees -> {}", employeeRepository.retrieveAllEmployees());
+
     }
 }
