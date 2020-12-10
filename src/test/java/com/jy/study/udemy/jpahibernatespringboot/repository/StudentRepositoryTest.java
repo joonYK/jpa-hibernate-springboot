@@ -48,4 +48,13 @@ class StudentRepositoryTest {
 
     }
 
+    @Test
+    @Transactional
+    public void retrieveStudentAndCourses() {
+        Student student = em.find(Student.class, 20001L);
+        logger.info("student -> {}", student);
+        //ManyToMany 매핑 기본 fetch 전략은 LAZY
+        logger.info("courses -> {}", student.getCourses());
+    }
+
 }
