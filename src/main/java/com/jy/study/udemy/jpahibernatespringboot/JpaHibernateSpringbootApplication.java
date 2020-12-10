@@ -1,6 +1,8 @@
 package com.jy.study.udemy.jpahibernatespringboot;
 
+import com.jy.study.udemy.jpahibernatespringboot.entity.Course;
 import com.jy.study.udemy.jpahibernatespringboot.entity.Review;
+import com.jy.study.udemy.jpahibernatespringboot.entity.Student;
 import com.jy.study.udemy.jpahibernatespringboot.repository.CourseRepository;
 import com.jy.study.udemy.jpahibernatespringboot.repository.StudentRepository;
 import org.slf4j.Logger;
@@ -34,9 +36,13 @@ public class JpaHibernateSpringbootApplication implements CommandLineRunner {
         //studentRepository.saveStudentWIthPassport();
         //courseRepository.addHardcodedReviewsForCourse();
 
-        List<Review> reviews = new ArrayList<>();
+        /*List<Review> reviews = new ArrayList<>();
         reviews.add(new Review("5", "Great Hands-on Stuff."));
         reviews.add(new Review("5", "Hatsoff."));
-        courseRepository.addReviewsForCourse(10003L, reviews);
+        courseRepository.addReviewsForCourse(10003L, reviews);*/
+
+        Student student = new Student("jack");
+        Course course = new Course("Microservices in 100 Steps");
+        studentRepository.insertStudentAndCourse(student, course);
     }
 }

@@ -1,5 +1,6 @@
 package com.jy.study.udemy.jpahibernatespringboot.repository;
 
+import com.jy.study.udemy.jpahibernatespringboot.entity.Course;
 import com.jy.study.udemy.jpahibernatespringboot.entity.Passport;
 import com.jy.study.udemy.jpahibernatespringboot.entity.Student;
 import lombok.RequiredArgsConstructor;
@@ -67,5 +68,13 @@ public class StudentRepository {
         //영속성 컨텍스트 (수정된 student, 수정된 passport)
 
         em.flush();
+    }
+
+    public void insertStudentAndCourse(Student student, Course course) {
+        em.persist(student);
+        em.persist(course);
+
+        student.addCourse(course);
+        course.addStudent(student);
     }
 }
