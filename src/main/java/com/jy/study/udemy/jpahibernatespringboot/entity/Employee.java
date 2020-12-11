@@ -10,8 +10,7 @@ import javax.persistence.*;
 @Setter
 @ToString
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@DiscriminatorColumn(name = "EmployeeType")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Employee {
 
     @Id
