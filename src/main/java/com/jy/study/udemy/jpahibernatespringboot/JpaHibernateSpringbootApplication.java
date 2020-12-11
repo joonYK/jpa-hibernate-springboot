@@ -1,6 +1,7 @@
 package com.jy.study.udemy.jpahibernatespringboot;
 
-import com.jy.study.udemy.jpahibernatespringboot.entity.*;
+import com.jy.study.udemy.jpahibernatespringboot.entity.FullTimeEmployee;
+import com.jy.study.udemy.jpahibernatespringboot.entity.PartTimeEmployee;
 import com.jy.study.udemy.jpahibernatespringboot.repository.CourseRepository;
 import com.jy.study.udemy.jpahibernatespringboot.repository.EmployeeRepository;
 import com.jy.study.udemy.jpahibernatespringboot.repository.StudentRepository;
@@ -12,8 +13,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 @SpringBootApplication
 public class JpaHibernateSpringbootApplication implements CommandLineRunner {
