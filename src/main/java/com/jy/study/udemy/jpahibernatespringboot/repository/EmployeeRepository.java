@@ -1,6 +1,8 @@
 package com.jy.study.udemy.jpahibernatespringboot.repository;
 
 import com.jy.study.udemy.jpahibernatespringboot.entity.Employee;
+import com.jy.study.udemy.jpahibernatespringboot.entity.FullTimeEmployee;
+import com.jy.study.udemy.jpahibernatespringboot.entity.PartTimeEmployee;
 import com.jy.study.udemy.jpahibernatespringboot.entity.Student;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -25,8 +27,12 @@ public class EmployeeRepository {
         em.persist(employee);
     }
 
-    public List<Employee> retrieveAllEmployees() {
-        return em.createQuery("select e from Employee e", Employee.class).getResultList();
+    public List<PartTimeEmployee> retrieveAllPartTimeEmployees() {
+        return em.createQuery("select e from PartTimeEmployee e", PartTimeEmployee.class).getResultList();
+    }
+
+    public List<FullTimeEmployee> retrieveAllFullTimeEmployees() {
+        return em.createQuery("select e from FullTimeEmployee e", FullTimeEmployee.class).getResultList();
     }
 
 }

@@ -9,9 +9,11 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
-@Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-public class Employee {
+//부모클래스는 단순히 공통적으로 갖고 있어야하는 필드들을 자식클래스에서 재사용하기위한 용도로 사용된다.
+@MappedSuperclass
+//@Entity
+//@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Employee {
 
     @Id
     @GeneratedValue
