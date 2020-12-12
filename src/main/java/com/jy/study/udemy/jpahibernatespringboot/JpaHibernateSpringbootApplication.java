@@ -47,11 +47,11 @@ public class JpaHibernateSpringbootApplication implements CommandLineRunner {
         Course course = new Course("Microservices in 100 Steps");
         studentRepository.insertStudentAndCourse(student, course);*/
 
-        employeeRepository.insert(new PartTimeEmployee("Jill", new BigDecimal(50)));
+        /*employeeRepository.insert(new PartTimeEmployee("Jill", new BigDecimal(50)));
         employeeRepository.insert(new FullTimeEmployee("Jack", new BigDecimal(10000)));
-
         logger.info("Full Time Employees -> {}", employeeRepository.retrieveAllFullTimeEmployees());
-        logger.info("Part Time Employees -> {}", employeeRepository.retrieveAllPartTimeEmployees());
+        logger.info("Part Time Employees -> {}", employeeRepository.retrieveAllPartTimeEmployees());*/
+
 
     }
 }

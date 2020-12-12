@@ -43,6 +43,14 @@ public class JPQLTest {
     }
 
     @Test
+    public void jpql_courses_without_students() {
+        //From Course는 데이터베이스 테이블의 course가 아닌 자바의 엔티티 클래스.
+        TypedQuery<Course> query = em.createQuery("select c from Course c where c.students is empty", Course.class);
+        List<Course> resultList = query.getResultList();
+        logger.info("Results -> {}", resultList);
+    }
+
+    @Test
     public void namedQuery_all_courses() {
         //From Course는 데이터베이스 테이블의 course가 아닌 자바의 엔티티 클래스.
         TypedQuery<Course> query = em.createNamedQuery("query_get_all_courses", Course.class);
