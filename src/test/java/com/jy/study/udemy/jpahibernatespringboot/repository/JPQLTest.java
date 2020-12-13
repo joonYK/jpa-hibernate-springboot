@@ -65,4 +65,18 @@ public class JPQLTest {
         logger.info("name = \"query_get_100_Step_courses\", query = \"Select c From Course c where name like '%100 Steps'\" -> {}", resultList);
     }
 
+    @Test
+    public void jpql_courses_with_atleast_2_students() {
+        TypedQuery<Course> query = em.createQuery("select c from Course c where size(c.students) >= 2", Course.class);
+        List<Course> resultList = query.getResultList();
+        logger.info("Results -> {}", resultList);
+    }
+
+    @Test
+    public void jpql_courses_ordered_by_students() {
+        TypedQuery<Course> query = em.createQuery("select c from Course c order by size(c.students) desc", Course.class);
+        List<Course> resultList = query.getResultList();
+        logger.info("Results -> {}", resultList);
+    }
+
 }
