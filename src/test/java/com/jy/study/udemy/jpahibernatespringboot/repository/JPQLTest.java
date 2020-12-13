@@ -87,4 +87,22 @@ public class JPQLTest {
         logger.info("Results -> {}", resultList);
     }
 
+    @Test
+    public void jpql_join() {
+        //inner join
+        //Query query = em.createQuery("select c, s from Course c JOIN c.students s");
+
+        //left join
+        //Query query = em.createQuery("select c, s from Course c LEFT JOIN c.students s");
+
+        //cross join
+        Query query = em.createQuery("select c, s from Course c, Student s");
+
+        List<Object[]> resultList = query.getResultList();
+        logger.info("Results Size -> {}", resultList.size());
+        for (Object[] result : resultList)
+            logger.info("Course : {} Student : {}", result[0], result[1]);
+
+    }
+
 }
