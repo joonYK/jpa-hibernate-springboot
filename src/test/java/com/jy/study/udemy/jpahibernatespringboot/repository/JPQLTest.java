@@ -1,6 +1,7 @@
 package com.jy.study.udemy.jpahibernatespringboot.repository;
 
 import com.jy.study.udemy.jpahibernatespringboot.entity.Course;
+import com.jy.study.udemy.jpahibernatespringboot.entity.Student;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -76,6 +77,13 @@ public class JPQLTest {
     public void jpql_courses_ordered_by_students() {
         TypedQuery<Course> query = em.createQuery("select c from Course c order by size(c.students) desc", Course.class);
         List<Course> resultList = query.getResultList();
+        logger.info("Results -> {}", resultList);
+    }
+
+    @Test
+    public void jpql_students_with_passports_in_a_certain_pattern() {
+        TypedQuery<Student> query = em.createQuery("select s from Student s where s.passport.number like '%1234%'", Student.class);
+        List<Student> resultList = query.getResultList();
         logger.info("Results -> {}", resultList);
     }
 
