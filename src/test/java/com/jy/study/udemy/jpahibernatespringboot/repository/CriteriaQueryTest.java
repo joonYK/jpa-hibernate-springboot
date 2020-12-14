@@ -9,10 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import java.util.List;
 
 @SpringBootTest
@@ -69,13 +66,52 @@ public class CriteriaQueryTest {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Course> cq = cb.createQuery(Course.class);
 
-
         //2. 쿼리와 관련된 테이블의 루트 정의 ("From Course c")
         Root<Course> courseRoot = cq.from(Course.class);
 
         //3. 검색 조건 정의
         Predicate studentsIsEmpty = cb.isEmpty(courseRoot.get("students"));
         cq.where(studentsIsEmpty);
+
+        //4. criteriaQuery를 사용해서 조회.
+        TypedQuery<Course> query = em.createQuery(cq.select(courseRoot));
+        List<Course> resultList = query.getResultList();
+        logger.info("Typed Query -> {}", resultList);
+    }
+
+    @Test
+    public void join() {
+        //"Select c From Course c join c.students s"
+
+        //1. CriteriaBuilder로 CriteriaQuery 생성.
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Course> cq = cb.createQuery(Course.class);
+
+        //2. 쿼리와 관련된 테이블의 루트 정의 ("From Course c")
+        Root<Course> courseRoot = cq.from(Course.class);
+
+        //3. 검색 조건 정의
+        Join<Object, Object> join = courseRoot.join("students");
+
+        //4. criteriaQuery를 사용해서 조회.
+        TypedQuery<Course> query = em.createQuery(cq.select(courseRoot));
+        List<Course> resultList = query.getResultList();
+        logger.info("Typed Query -> {}", resultList);
+    }
+
+    @Test
+    public void left_join() {
+        //"Select c From Course c left join c.students s"
+
+        //1. CriteriaBuilder로 CriteriaQuery 생성.
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Course> cq = cb.createQuery(Course.class);
+
+        //2. 쿼리와 관련된 테이블의 루트 정의 ("From Course c")
+        Root<Course> courseRoot = cq.from(Course.class);
+
+        //3. 검색 조건 정의
+        Join<Object, Object> join = courseRoot.join("students", JoinType.LEFT);
 
         //4. criteriaQuery를 사용해서 조회.
         TypedQuery<Course> query = em.createQuery(cq.select(courseRoot));
