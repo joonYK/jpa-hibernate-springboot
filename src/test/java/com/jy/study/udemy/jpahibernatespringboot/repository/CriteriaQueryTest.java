@@ -61,6 +61,27 @@ public class CriteriaQueryTest {
         logger.info("Typed Query -> {}", resultList);
     }
 
+    @Test
+    public void all_courses_without_students() {
+        //"Select c From Course c where c.students is empty"
+
+        //1. CriteriaBuilder로 CriteriaQuery 생성.
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Course> cq = cb.createQuery(Course.class);
+
+
+        //2. 쿼리와 관련된 테이블의 루트 정의 ("From Course c")
+        Root<Course> courseRoot = cq.from(Course.class);
+
+        //3. 검색 조건 정의
+        Predicate studentsIsEmpty = cb.isEmpty(courseRoot.get("students"));
+        cq.where(studentsIsEmpty);
+
+        //4. criteriaQuery를 사용해서 조회.
+        TypedQuery<Course> query = em.createQuery(cq.select(courseRoot));
+        List<Course> resultList = query.getResultList();
+        logger.info("Typed Query -> {}", resultList);
+    }
 
 
 }
