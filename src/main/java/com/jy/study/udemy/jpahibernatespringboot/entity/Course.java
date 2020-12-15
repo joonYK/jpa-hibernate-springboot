@@ -28,10 +28,10 @@ public class Course {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "course")
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
     private List<Review> reviews = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "courses")
+    @ManyToMany(mappedBy = "courses", cascade = CascadeType.ALL)
     private List<Student> students = new ArrayList<>();
 
     @CreationTimestamp
