@@ -33,6 +33,21 @@ class CourseRepositoryTest {
     }
 
     @Test
+    @Transactional
+    public void findById_firstLevelCacheDemo() {
+        Course course = repository.findById(10001L);
+        logger.info("First Course Retrieved {}", course);
+
+        //다시 DB에서 조회해오지 않고 영속성 컨텍스트에 저장되어있는 데이터를 가져온다. (1차 캐시)
+        //@Transactional 으로 트랜잭션이 묶이지 않으면, 각 조회시마다 트랜잭션과 영속성 컨텍스트가 적용되기 때문에 1차 캐시를 이용한 조회는 사용할 수 없다.
+        Course course1 = repository.findById(10001L);
+        logger.info("First Course Retrieved again {}", course);
+
+        assertEquals("JPA in 50 Steps", course.getName());
+        assertEquals("JPA in 50 Steps", course1.getName());
+    }
+
+    @Test
     //애플리케이션 컨텍스트를 공유하지 않도록 적용. 뒤의 테스트에 영향 X
     @DirtiesContext
     public void deleteById_basic() {
