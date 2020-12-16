@@ -3,9 +3,12 @@ package com.jy.study.udemy.jpahibernatespringboot.repository;
 import com.jy.study.udemy.jpahibernatespringboot.entity.Course;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.List;
 
+//course resource에 대한 restful api를 쉽고 빠르게 생성.
+@RepositoryRestResource(path = "courses")
 public interface CourseSpringDataRepository extends JpaRepository<Course, Long> {
     Course findByNameAndId(String name, Long id);
 

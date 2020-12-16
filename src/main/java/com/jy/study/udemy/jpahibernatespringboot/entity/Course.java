@@ -1,5 +1,6 @@
 package com.jy.study.udemy.jpahibernatespringboot.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -32,6 +33,7 @@ public class Course {
     private List<Review> reviews = new ArrayList<>();
 
     @ManyToMany(mappedBy = "courses", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Student> students = new ArrayList<>();
 
     @CreationTimestamp
