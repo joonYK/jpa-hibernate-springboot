@@ -5,7 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -20,7 +22,11 @@ import java.util.List;
         @NamedQuery(name = "query_get_all_courses", query = "Select c From Course c"),
         @NamedQuery(name = "query_get_100_Step_courses", query = "Select c From Course c where name like '%100 Step'")
 })
-@Cacheable(true)
+@Cacheable
+//delete 시, 다른 쿼리를 적용.
+@SQLDelete(sql = "update course set deleted=true where id = ?")
+//select 시, where 조건에 항상 아래의 조건을 추가하도록 적용.
+@Where(clause = "deleted = false")
 public class Course {
 
     @Id
@@ -42,6 +48,8 @@ public class Course {
 
     @UpdateTimestamp
     private LocalDateTime lastUpdatedDate;
+
+    private boolean deleted;
 
     protected Course() {
     }
