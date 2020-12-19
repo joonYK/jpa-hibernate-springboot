@@ -8,6 +8,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.Where;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -28,6 +30,8 @@ import java.util.List;
 //select 시, where 조건에 항상 아래의 조건을 추가하도록 적용.
 @Where(clause = "deleted = false")
 public class Course {
+
+    private static Logger LOGGER = LoggerFactory.getLogger(Course.class);
 
     @Id
     @GeneratedValue
@@ -50,6 +54,13 @@ public class Course {
     private LocalDateTime lastUpdatedDate;
 
     private boolean deleted;
+
+    //엔티티 리스너. SQL delete 요청 전에 호출.
+    @PreRemove
+    private void preRemove() {
+        LOGGER.info("Setting deleted to True");
+        this.deleted = true;
+    }
 
     protected Course() {
     }
