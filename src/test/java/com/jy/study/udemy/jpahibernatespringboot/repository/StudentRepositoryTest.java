@@ -1,5 +1,6 @@
 package com.jy.study.udemy.jpahibernatespringboot.repository;
 
+import com.jy.study.udemy.jpahibernatespringboot.entity.Address;
 import com.jy.study.udemy.jpahibernatespringboot.entity.Passport;
 import com.jy.study.udemy.jpahibernatespringboot.entity.Student;
 import org.junit.jupiter.api.Test;
@@ -36,6 +37,16 @@ class StudentRepositoryTest {
         //Lazy fetch로 실제 passport를 사용할 때, 데이터베이스에서 조회해 온다.
         logger.info("passport -> {}", student.getPassport());
 
+    }
+
+    @Test
+    @Transactional
+    public void setAddressDetails() {
+        Student student = em.find(Student.class, 20001L);
+        student.setAddress(new Address("No 101", "Some Street", "Hyderabad"));
+        em.flush();
+        logger.info("student -> {}", student.getId());
+        logger.info("passport -> {}", student.getPassport());
     }
 
     @Test
