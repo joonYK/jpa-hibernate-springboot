@@ -2,6 +2,7 @@ package com.jy.study.udemy.jpahibernatespringboot.repository;
 
 import com.jy.study.udemy.jpahibernatespringboot.entity.Course;
 import com.jy.study.udemy.jpahibernatespringboot.entity.Review;
+import com.jy.study.udemy.jpahibernatespringboot.entity.ReviewRating;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,8 +54,8 @@ public class CourseRepository {
         logger.info("course.getReviews() -> {}", course.getReviews());
 
         //add 2 reviews to it
-        Review review1 = new Review("5", "Great Hands-on Stuff.");
-        Review review2 = new Review("5", "Hatsoff.");
+        Review review1 = new Review(ReviewRating.FIVE, "Great Hands-on Stuff.");
+        Review review2 = new Review(ReviewRating.FIVE, "Hatsoff.");
 
         //setting the relationship
         course.addReview(review1);
